@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println(fibonacci(3));
+		System.out.println(packageRice(2, 10, 18));
 
 	}
 	
@@ -91,5 +91,75 @@ public class Main {
 		}
 		return fibonacciArrayList.get(n);
     }
+	
+	public static boolean isPalindrome(String word) { 
+		for (int i = 0; i < word.length() - 1; i++) {
+			if(word.charAt(i) != word.charAt((word.length() - 1) - i))
+	                return false;
+		}
+		return true;
+	}
+	
+	//FIBONACCI EVEN NUMBERS
+	public static Integer fibonacciEvenNumbers(Integer n) { 
+		
+		Integer total = 0;
+		Integer prevprev = 0;
+		Integer prev = 1;
+		Integer fibonacci = 0;
+		
+		while(prevprev + prev < n) {
+			fibonacci = prevprev + prev;
+			prevprev = prev;
+			prev = fibonacci;
+			if(fibonacci % 2 == 0) {
+				total += prev;
+			}
+		}
+		return total;
+    }
+	
+	//GREATEST COMMON DIVISOR
+	public static Integer gcd(Integer p, Integer q) { 
+		
+		Integer divisor = 1;
+		Integer gcd = 1;
+		
+		while(p > divisor ) {
+			if(p % divisor == 0 && q % divisor == 0) {
+				gcd = divisor;
+		}
+			divisor++;
+		}
+		return gcd;
+	}
+	
+	//PACKAGE RICE BAGS
+	public static Boolean packageRice(Integer big, Integer small, Integer goal) { 
 
+			while(goal - 5 >= 0 && big > 0) {
+				goal -= 5;
+				big--;
+			}
+			while(goal - 1 >= 0 && small > 0) {
+				goal -= 1;
+				small--;
+			}
+			if(goal == 0)
+				return true;
+			
+			return false;
+	}
+	
+	//FILTER STRINGS USING LAMBDAS AND STREAMS
+	public List<String> search(List<String> list) { 
+		
+		List<String> result = list.stream()             
+                .filter(word -> word.length() == 3)
+                .filter(word -> word.startsWith("a"))
+                .collect(Collectors.toList());              
+
+        return result;
+		
+	}
 }
